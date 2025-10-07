@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for Leave</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container" id="container">
+    <h1>Apply for Leave</h1>
+    <form method="POST" action="{{ url_for('apply_leave') }}">
+        <input type="date" name="start_date" required>
+        <input type="date" name="end_date" required>
+        <textarea name="reason" placeholder="Reason for Leave" required style="width:100%; height:100px; margin-top:10px; border-radius:8px; padding:10px;"></textarea>
+        <button type="submit">Submit Leave Application</button>
+    </form>
+    <a href="{{ url_for('dashboard_user') }}"><button>Back to Dashboard</button></a>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
