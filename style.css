@@ -208,7 +208,7 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
-/* Main card style for dashboard, leave pages, etc */
+
 .main-card {
     background-color: #ffffff;
     padding: 40px;
@@ -220,7 +220,6 @@ body{
     text-align: center;
 }
 
-/* Common button style (reuses your login button style) */
 .main-card button {
     background-color: #512da8;
     color: #fff;
@@ -232,7 +231,6 @@ body{
     font-size: 16px;
 }
 
-/* Table inside card */
 .main-table {
     width: 100%;
     margin-top: 20px;
