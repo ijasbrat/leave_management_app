@@ -8,18 +8,16 @@ app.secret_key = 'your_secret_key_here'
 def get_db_connection():
     conn = mysql.connector.connect(
         host='localhost',
-        user='root',          # your MySQL user
-        password='root',      # your MySQL password
-        database='user_auth'  # your database name
+        user='root',          
+        password='root',      
+        database='user_auth'  
     )
     return conn
 
-# Home page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Manager Login (Sign In)
 @app.route('/signin', methods=['POST'])
 def signin():
     email = request.form['email']
@@ -35,7 +33,6 @@ def signin():
         flash('Incorrect Manager credentials!', 'error')
         return redirect(url_for('index'))
 
-# User Login (Log In)
 @app.route('/login', methods=['POST'])
 def login():
     email = request.form['email']
@@ -51,14 +48,12 @@ def login():
         flash('Incorrect User credentials!', 'error')
         return redirect(url_for('index'))
 
-# Logout
 @app.route('/logout')
 def logout():
     session.clear()
     flash('Logged out successfully.', 'success')
     return redirect(url_for('index'))
 
-# Manager Dashboard
 @app.route('/dashboard_manager')
 def dashboard_manager():
     if 'loggedin' in session and session['role'] == 'manager':
@@ -67,7 +62,6 @@ def dashboard_manager():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# User Dashboard
 @app.route('/dashboard_user')
 def dashboard_user():
     if 'loggedin' in session and session['role'] == 'user':
@@ -76,7 +70,6 @@ def dashboard_user():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# User - Apply Leave
 @app.route('/leave_form', methods=['GET', 'POST'])
 def leave_form():
     if 'loggedin' in session and session['role'] == 'user':
@@ -101,7 +94,6 @@ def leave_form():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# User - View Own Leaves
 @app.route('/leave_management_user')
 def leave_management_user():
     if 'loggedin' in session and session['role'] == 'user':
@@ -116,7 +108,6 @@ def leave_management_user():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# Manager - View All Leaves
 @app.route('/leave_management_manager')
 def leave_management_manager():
     if 'loggedin' in session and session['role'] == 'manager':
@@ -131,7 +122,7 @@ def leave_management_manager():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# Manager - Accept Leave
+
 @app.route('/accept_leave/<int:id>')
 def accept_leave(id):
     if 'loggedin' in session and session['role'] == 'manager':
@@ -147,7 +138,6 @@ def accept_leave(id):
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# Manager - Reject Leave
 @app.route('/reject_leave/<int:id>')
 def reject_leave(id):
     if 'loggedin' in session and session['role'] == 'manager':
@@ -163,7 +153,6 @@ def reject_leave(id):
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# Manager - View Employee List
 @app.route('/employee_list')
 def employee_list():
     if 'loggedin' in session and session['role'] == 'manager':
@@ -178,7 +167,6 @@ def employee_list():
         flash('Unauthorized access.', 'error')
         return redirect(url_for('index'))
 
-# Manager - View Individual Employee Leaves
 @app.route('/employee/<string:email>')
 def employee_profile(email):
     if 'loggedin' in session and session['role'] == 'manager':
